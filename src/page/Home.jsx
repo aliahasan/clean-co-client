@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import IntroImage from '../assets/images/intro.jpg';
-import Container from '../components/ui/Container';
+import { Link } from "react-router-dom";
+import IntroImage from "../assets/images/intro.jpg";
+import Container from "../components/ui/Container";
 
 const Home = () => {
   return (
@@ -8,7 +8,7 @@ const Home = () => {
       <div className="flex py-32 gap-16">
         <div className="flex-1 flex flex-col justify-between py-14 ">
           <h1 className="text-7xl font-bold text-start">
-            <span>Quality Cleaning</span> <br />{' '}
+            <span>Quality Cleaning</span> <br />{" "}
             <span className="text-primary">for Your Home</span>
           </h1>
           <p className="my-5 max-w-[65ch]">
