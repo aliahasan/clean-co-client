@@ -1,35 +1,39 @@
-import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
-import useAuth from '../hooks/useAuth';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
+import useAxios from "../hooks/useAxios";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
+  const axios = useAxios();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const toastId = toast.loading('Logging in ...');
+    const toastId = toast.loading("Logging in ...");
 
     try {
-      await login(email, password);
-      toast.success('Logged in', { id: toastId });
-      navigate('/');
+      const user = await login(email, password);
+      console.log(user.user.email);
+      axios.post("/auth/access-token", { email: user.user.email });
+      toast.success("Logged in", { id: toastId });
+      navigate("/");
     } catch (error) {
       toast.error(error.message, { id: toastId });
     }
   };
 
   const handleGoogleLogin = async () => {
-    const toastId = toast.loading('Logging in ...');
+    const toastId = toast.loading("Logging in ...");
 
     try {
       await googleLogin(email, password);
-      toast.success('Logged in', { id: toastId });
-      navigate('/');
+      toast.success("Logged in", { id: toastId });
+      navigate("/");
     } catch (error) {
       toast.error(error.message, { id: toastId });
     }
@@ -64,7 +68,7 @@ const Login = () => {
             />
           </div>
           <p className="text-center text-sm">
-            Don&apos;t have an account ?{' '}
+            Don&apos;t have an account ?{" "}
             <NavLink
               to="/signup"
               className="text-primary font-bold hover:underline cursor-pointer "
