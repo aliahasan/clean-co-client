@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
-  const axios = useAxios();
+  const myAxios = useAxios();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,10 +18,13 @@ const Login = () => {
 
     try {
       const user = await login(email, password);
-      console.log(user.user.email);
-      axios.post("/auth/access-token", { email: user.user.email });
-      toast.success("Logged in", { id: toastId });
-      navigate("/");
+      const res = await myAxios.post("/auth/access-token", {
+        email: user?.user?.email,
+      });
+      if (res.data.success) {
+        toast.success("Logged in", { id: toastId });
+        navigate("/");
+      }
     } catch (error) {
       toast.error(error.message, { id: toastId });
     }

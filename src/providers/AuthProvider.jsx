@@ -5,14 +5,15 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-} from 'firebase/auth';
-import { createContext, useEffect, useState } from 'react';
-import { auth } from '../config/firebase.config';
-import PropTypes from 'prop-types';
+} from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
+import { auth } from "../config/firebase.config";
+import PropTypes from "prop-types";
+// import axios from "axios";
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => { 
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -46,7 +47,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const values = { createUser, login, user, isLoading, logout, googleLogin };
+  const values = { user, createUser, login, isLoading, logout, googleLogin };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

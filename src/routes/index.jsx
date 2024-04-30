@@ -1,20 +1,21 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from '../App';
-import About from '../page/About';
-import Contact from '../page/Contact';
-import Login from '../page/Login';
-import Register from '../page/Register';
-import AdminLayout from '../components/layout/AdminLayout';
-import AddService from '../page/AddService';
-import Home from '../page/Home';
-import Profile from '../page/Profile';
-import TrackOrder from '../page/TrackOrder';
-import Services from '../page/Services';
-import Booking from '../page/Booking';
+import { createBrowserRouter } from "react-router-dom";
+import App from "../App";
+import About from "../page/About";
+import Contact from "../page/Contact";
+import Login from "../page/Login";
+import Register from "../page/Register";
+import AdminLayout from "../components/layout/AdminLayout";
+import AddService from "../page/AddService";
+import Home from "../page/Home";
+import Profile from "../page/Profile";
+import TrackOrder from "../page/TrackOrder";
+import Services from "../page/Services";
+import Booking from "../page/Booking";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
@@ -22,33 +23,37 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'about',
+        path: "about",
         element: <About />,
       },
       {
-        path: 'contact',
+        path: "contact",
         element: <Contact />,
       },
       {
-        path: 'services',
-        element: <Services />,
+        path: "services",
+        element: (
+          <PrivateRoute>
+            <Services></Services>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'booking',
+        path: "booking",
         element: <Booking />,
       },
     ],
   },
   {
-    path: '/login',
+    path: "/login",
     element: <Login />,
   },
   {
-    path: '/register',
+    path: "/register",
     element: <Register />,
   },
   {
-    path: '/user',
+    path: "/user",
     element: <App />,
     children: [
       {
@@ -56,13 +61,13 @@ const routes = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: 'orders',
+        path: "orders",
         element: <TrackOrder />,
       },
     ],
   },
   {
-    path: '/admin',
+    path: "/admin",
     element: <AdminLayout />,
     children: [
       {

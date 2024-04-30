@@ -8,10 +8,9 @@ const Services = () => {
   const axios = useAxios();
 
   const getServices = async () => {
-    const res = await axios.get("/services");
-    return res;
+    const response = await axios.get("/services");
+    return response;
   };
-
   const {
     data: services,
     isLoading,
@@ -28,7 +27,6 @@ const Services = () => {
   if (isError) {
     return <p>Something went wrong please try again : {error}</p>;
   }
-
   return (
     <>
       <Container className="mt-10">
@@ -42,7 +40,7 @@ const Services = () => {
       <Container className="mb-64">
         <div className="grid grid-cols-3 gap-10">
           {/* Service Cards goes here */}
-          {services?.data?.map((item) => (
+          {services?.data?.result?.map((item) => (
             <ServiceCard key={item?._id} service={item}></ServiceCard>
           ))}
         </div>
