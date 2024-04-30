@@ -39,7 +39,7 @@ const routes = createBrowserRouter([
         ),
       },
       {
-        path: "booking",
+        path: "booking/:id",
         element: <Booking />,
       },
     ],
@@ -62,7 +62,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "orders",
-        element: <TrackOrder />,
+        element: (
+          <PrivateRoute>
+            <TrackOrder />,
+          </PrivateRoute>
+        ),
       },
     ],
   },
